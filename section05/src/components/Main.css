@@ -1,0 +1,12 @@
+.logout{
+    background-color: red;
+    color: white;
+    border-bottom: 5px solid green;
+}
+
+.login{
+    background-color: blue;
+    color: white;
+    border-bottom: 5px solid red;
+}
+    
