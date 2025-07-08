@@ -1,16 +1,14 @@
 import './App.css'
-import Counter from './components/Counter';
-import Bulb from './components/Bulb';
 import Register from './components/Register';
+import HookExam from './components/HookExam';
 
 function App() {
 
   return (  
     <>
-      <Counter/>
-      <Bulb/>
-      <Register/>
 
+      <Register/>
+      <HookExam/>
       
     </>
   );
