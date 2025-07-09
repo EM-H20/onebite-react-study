@@ -6,7 +6,7 @@ import { useState } from "react"
 function App() {
   const [count, setCount] = useState(0);
 
-  const onChangeCount = (value) => {
+  const onClickButton = (value) => {
     if(!value){
       setCount(0);
       return;
@@ -22,7 +22,7 @@ function App() {
     </section>
 
     <section>
-      <Controller onChangeCount={onChangeCount}/>
+      <Controller onClickButton={onClickButton}/>
     </section>
   </div>
   )
