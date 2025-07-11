@@ -1,7 +1,7 @@
 import './App.css'
 import ContactList from './components/ContactList'
 import ContactEditor from './components/ContactEditor'
-import { useRef, useReducer } from 'react'
+import { useRef, useReducer, useMemo } from 'react'
 
 const initialState = {
   contacts: [
@@ -38,7 +38,7 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initialState)
   const idRef = useRef(3);
 
-  const onCreate = (contact) => {
+  const onCreate = useMemo((contact) => {
     dispatch({
       type: 'CREATE',
       data: {
@@ -47,13 +47,13 @@ function App() {
         email: contact.email,
       },
     })
-  }
-  const onDelete = (contact) => {
+  }, [])
+  const onDelete = useMemo((contact) => {
     dispatch({
       type: 'DELETE',
       data: contact,
     })
-  }
+  }, [])
   return (
     <div className="App">
       <h1>Contact List</h1>
