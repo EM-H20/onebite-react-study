@@ -1,5 +1,5 @@
 import './ContactEditor.css'
-import { useRef, useReducer } from 'react'
+import { useRef, useReducer, useCallback } from 'react'
 
 const initialState = {
     name: '',
@@ -23,7 +23,7 @@ const ContactEditor = ({ onCreate }) => {
     const nameRef = useRef()
     const [state, dispatch] = useReducer(reducer, initialState)
 
-    const onSubmit = () => {
+    const onSubmit = useCallback(() => {
         // 이름이 없으면 이름 입력란에 포커스
         if (!state.name.trim()) {
             nameRef.current.focus()
@@ -31,7 +31,7 @@ const ContactEditor = ({ onCreate }) => {
         }
         onCreate(state)
         dispatch({ type: 'RESET' })
-    }
+    }, [onCreate, state])
 
     const onKeyDown = (e) => {
         // Enter 키를 눌렀을 때 onSubmit 호출

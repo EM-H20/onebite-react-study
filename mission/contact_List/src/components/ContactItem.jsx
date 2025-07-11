@@ -1,4 +1,5 @@
 import './ContactItem.css'
+import {memo} from 'react'
 const ContactItem = ({ contact, onDelete }) => {
     return (
         <div className="contact-item">
@@ -9,4 +10,4 @@ const ContactItem = ({ contact, onDelete }) => {
     )
 }
 
-export default ContactItem
+export default memo(ContactItem);
