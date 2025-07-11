@@ -1,0 +1,46 @@
+.contact-editor {
+    width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+    padding: 5px 10px;
+    background: #fafbfc;
+    border-radius: 10px;
+    box-shadow: 0 0 0 2px #e0e4e8;
+}
+
+.input-row {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    width: 100%;
+}
+
+.input-row > .name-input {
+    flex: 1;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+}
+
+.input-row > .email-input {
+    flex: 2;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+}
+
+.contact-editor > button {
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+    color: black;
+    font-weight: bold;
+    background-color: white;
+    padding: 5px;
+    font-size: 1rem;
+    margin-top: 8px;
+}

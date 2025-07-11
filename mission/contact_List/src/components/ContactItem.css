@@ -1,0 +1,28 @@
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 5px 10px;
+    background: #fafbfc;
+    border-radius: 10px;
+    box-shadow: 0 0 0 2px #e0e4e8;
+}
+
+.name {
+    flex: 1;
+}
+
+.email {
+    flex: 3;
+}
+
+button {
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+    color: black;
+    font-weight: bold;
+    background-color: white;
+    font-size: 1rem;
+    margin-top: 0;
+}
