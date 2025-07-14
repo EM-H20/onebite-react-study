@@ -1,5 +1,6 @@
 import './ContactEditor.css'
-import { useRef, useReducer, useCallback } from 'react'
+import { useRef, useReducer, useCallback, useContext } from 'react'
+import { ContactDispatchContext } from '../App';
 
 const initialState = {
     name: '',
@@ -19,7 +20,8 @@ function reducer(state, action) {
     }
 }
 
-const ContactEditor = ({ onCreate }) => {
+const ContactEditor = () => {
+    const { onCreate } = useContext(ContactDispatchContext);
     const nameRef = useRef()
     const [state, dispatch] = useReducer(reducer, initialState)
 
