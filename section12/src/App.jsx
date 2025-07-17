@@ -4,6 +4,10 @@ import New from './pages/New'
 import Diary from './pages/Diary'
 import Edit from './pages/Edit'
 import Notfound from './pages/Notfound'
+
+import Button from './components/Button'
+import Header from './components/Header'
+
 import { Routes, Route, Link, useNavigate } from 'react-router-dom'
 
 // 1. "/" : 모든 일기를 조회하는 Home 페이지
@@ -16,13 +20,16 @@ function App() {
   
   return (
     <>
-    <div>
-      <Link to={"/"}>Home </Link>
-      <Link to={"/new"}>New </Link>
-      <Link to={"/diary"}>Diary </Link>
-      <Link to={"/edit"}>Edit </Link>
-    </div>
-    <button onClick={() => navigate("/new")}>New 페이지로 이동</button>
+    <Header 
+    title="일기" 
+    leftChild={<Button text={"Left"}/>} 
+    rightChild={<Button text={"Right"}/>}/>
+
+    <Button text="Button" type="DEFAULT" onClick={() => navigate("/new")}/>
+
+    <Button text="Button" type="POSITIVE" onClick={() => navigate("/new")}/>
+
+    <Button text="Button" type="NEGATIVE" onClick={() => navigate("/new")}/>
 
     <Routes>
         <Route path="/" element={<Home />} />
