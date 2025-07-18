@@ -1,0 +1,18 @@
+.DiaryList .DiaryList_menu{
+    margin: 20px 0px;
+    display: flex;
+    gap : 10px;
+}
+
+.DiaryList .DiaryList_menu select {
+    background-color: rgb(236, 236, 236);
+    border-radius: 5px;
+    border: none;
+    padding : 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.DiaryList .DiaryList_menu .Button {
+ flex : 1;
+}
