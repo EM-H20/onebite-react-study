@@ -1,10 +1,34 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import Header from "../components/Header";
+import Button from "../components/Button";
+import Viewer from "../components/Viewer";
+import useDiary from "../hooks/useDiary";
+import { getStringedDate } from "../util/get-stringed-date";
 
 const Diary = () => {
     const params = useParams();
+    const navigate = useNavigate();
+
+    const currentData = useDiary(params.id);
+    if(!currentData){
+        return <div>일기를 찾을 수 없습니다.</div>
+    }
+
+
+    const {createdDate, content, emotionId} = currentData;
+
     return (
         <div>
-            <h1>Diary {params.id}</h1>
+            <Header
+                title={getStringedDate(new Date(createdDate))}
+                leftChild={
+                    <Button text="< 뒤로가기" onClick={() => navigate(-1)} />
+                }
+                rightChild={
+                    <Button text="수정하기" onClick={() => { navigate(`/edit/${params.id}`) }} />
+                }
+            />
+            <Viewer emotionId={emotionId} content={content}/>
         </div>
     );
 };

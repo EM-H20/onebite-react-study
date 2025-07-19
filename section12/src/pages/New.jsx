@@ -17,7 +17,7 @@ const New = () => {
         <div>
             <Header 
             title="새 일기 쓰기" 
-            leftChild={<Button text="< 뒤로가기" onClick={() => navigate("/")}/>}/>
+            leftChild={<Button text="< 뒤로가기" onClick={() => navigate(-1)}/>}/>
             <Editor onSubmit={onSubmit}/>
         </div>
     );
