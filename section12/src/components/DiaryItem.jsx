@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { DiaryDispatchContext } from '../App';
 import Button from "./Button";
 
-const DiaryItem = ({id, emotionId, createdDate, content}) => {
+const DiaryItem = ({id, createdDate, emotionId, content}) => {
     const navigate = useNavigate();
     const { onDelete } = useContext(DiaryDispatchContext);
 
