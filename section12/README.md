@@ -1,12 +1,55 @@
-# React + Vite
+<img width="626" height="415" alt="스크린샷 2025-07-18 오후 10 40 02" src="https://github.com/user-attachments/assets/c4eb1cf5-0b64-4c79-8480-76d22bf35bd9" />
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h2>일기 삭제 기능 - useContext와 DiaryDispatchContext 사용</h2>
 
-Currently, two official plugins are available:
+<p>
+  <code>DiaryItem</code> 컴포넌트에서 <b>삭제하기</b> 버튼을 누르면 <code>App.jsx</code>에서 전달한 <code>onDelete</code> 함수가 실행되도록 구현할 수 있습니다.
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<ol>
+  <li>
+    <b>Context에서 onDelete 함수 가져오기</b>
+    <pre><code>
+import { useContext } from 'react';
+import { DiaryDispatchContext } from '../App';
 
-## Expanding the ESLint configuration
+const { onDelete } = useContext(DiaryDispatchContext);
+    </code></pre>
+  </li>
+  <li>
+    <b>삭제 버튼에 onDelete 연결</b>
+    <pre><code>
+&lt;Button
+  text="삭제하기"
+  type="NEGATIVE"
+  onClick={() =&gt; onDelete(id)}
+/&gt;
+    </code></pre>
+  </li>
+  <li>
+    <b>전체 예시 코드</b>
+    <pre><code>
+import { useContext } from 'react';
+import { DiaryDispatchContext } from '../App';
+import Button from './Button';
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+const DiaryItem = ({ id, ... }) =&gt; {
+  const { onDelete } = useContext(DiaryDispatchContext);
+
+  return (
+    &lt;div className="button_section"&gt;
+      &lt;Button
+        text="삭제하기"
+        type="NEGATIVE"
+        onClick={() =&gt; onDelete(id)}
+      /&gt;
+    &lt;/div&gt;
+  );
+};
+    </code></pre>
+  </li>
+</ol>
+
+<p>
+  위와 같이 구현하면, 삭제 버튼 클릭 시 <code>onDelete</code> 함수가 호출되어 해당 일기가 삭제됩니다.
+</p>
