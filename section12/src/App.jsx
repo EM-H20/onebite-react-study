@@ -6,42 +6,30 @@ import Edit from './pages/Edit'
 import Notfound from './pages/Notfound'
 
 import { Routes, Route } from 'react-router-dom'
-import { useReducer, useRef, createContext } from 'react'
-
-const mockData = [
-  {
-    id: 0,
-    createdDate: new Date("2025-07-18"),
-    content: '일기 1',
-    emotionId: 1,
-  },
-  {
-    id: 1,
-    createdDate: new Date("2025-07-17"),
-    content: '일기 2',
-    emotionId: 2,
-  },
-  {
-    id: 2,
-    createdDate: new Date("2025-06-16"),
-    content: '일기 3',
-    emotionId: 3,
-  },
-];
+import { useReducer, useRef, createContext, useEffect, useState } from 'react'
 
 function reducer(state, action){
+  let newState;
   switch(action.type){
     case "CREATE":
-      return [...state, action.data];
+      newState = [...state, action.data];
+      break;
     case "UPDATE":
-      return state.map((item) => (
+      newState = state.map((item) => (
         String(item.id) === String(action.data.id) ? action.data : item
       ));
+      break;
     case "DELETE":
-      return state.filter((item) => String(item.id) !== String(action.data.id));
+      newState = state.filter((item) => String(item.id) !== String(action.data.id));
+      break;
+    case "INIT":
+      return action.data;
     default:
       return state;
   }
+
+  localStorage.setItem("diary", JSON.stringify(newState));
+  return newState;
 }
 
 
@@ -49,10 +37,28 @@ export const DiaryStateContext = createContext();
 export const DiaryDispatchContext = createContext();
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
   //여러개의 일기 데이터
-  const [data, dispatch] = useReducer(reducer, mockData);
+  const [data, dispatch] = useReducer(reducer, []);
 
-  const idRef = useRef(3);
+  const idRef = useRef();
+
+  useEffect(() => {
+    const savedData = localStorage.getItem("diary");
+    if (!savedData) {
+      setIsLoading(false);
+     return;
+    }
+    const parsedData = JSON.parse(savedData);
+    if(!Array.isArray(parsedData)){
+      setIsLoading(false);
+      return;
+    }
+
+    idRef.current = parsedData[parsedData.length - 1].id + 1;
+    dispatch({type : "INIT", data : parsedData});
+    setIsLoading(false);
+  }, []);
 
   // 새로운 일기 추가
   const onCreate = (createdDate, content, emotionId) => {
@@ -92,6 +98,9 @@ function App() {
 
   return (
     <>
+    {isLoading ? (
+      <div>Loading...</div>
+    ) : (
     <DiaryStateContext value={data}>
       <DiaryDispatchContext value={{onCreate, onUpdate, onDelete}}>
         <Routes>
@@ -103,6 +112,7 @@ function App() {
       </Routes>
       </DiaryDispatchContext>
     </DiaryStateContext>
+    )}
     </>
   )
 }
