@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { DiaryDispatchContext, DiaryStateContext } from "../App";
 import { useNavigate, useParams } from "react-router-dom";
 import useDiary from "../hooks/useDiary";
+import usePageTitle from "../hooks/usePageTitle";
 
 const Edit = () => {
     const params = useParams();
@@ -30,6 +31,8 @@ const Edit = () => {
             navigate("/", {replace : true});
         }
     }
+    
+    usePageTitle(`${params.id}번 일기 수정`);
     
     return (
         <div>

@@ -41,7 +41,7 @@ function App() {
   //여러개의 일기 데이터
   const [data, dispatch] = useReducer(reducer, []);
 
-  const idRef = useRef();
+  const idRef = useRef(0);
 
   useEffect(() => {
     const savedData = localStorage.getItem("diary");
