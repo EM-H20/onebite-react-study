@@ -1,21 +1,32 @@
-import CurrenyInput from "./CurrenyInput";
+import CurrencyInput from "./CurrencyInput";
 import { useState } from "react";
 const EXCHANGE_RATE = 1300;
 
 const ExchangeRate = () => {
-    const [krw, setKrw] = useState(0);
-    const [usd, setUsd] = useState(0);
+    const [state, setState] = useState({
+        krw: 0,
+        usd: 0,
+    });
 
-    const onChangeRate = (e) => {
-        const value = e.target.value;
-        setKrw(value);
-        setUsd(value / EXCHANGE_RATE);
+    const onChangeRate = (currency, value) => {
+        if(currency === "krw") {
+            setState({
+                krw: value,
+                usd: value / EXCHANGE_RATE,
+            });
+        } else {
+            setState({
+                krw: value * EXCHANGE_RATE,
+                usd: value,
+            });
+        }
     };
 
     return (
         <div>
             <h1>환율 변환기 (KRW-USD)</h1>
-            <CurrenyInput onChangeRate={onChangeRate}/>
+            <CurrencyInput currency="krw" value={state.krw} onChange={onChangeRate}/>
+            <CurrencyInput currency="usd" value={state.usd} onChange={onChangeRate}/>
         </div>
     );  
 };
